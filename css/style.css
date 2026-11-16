@@ -8,6 +8,7 @@ a{color:#f3e9d2}a:hover{color:#ffffff}
 @keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-3px)}}
 @keyframes pop{0%{transform:scale(0.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
 @keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes drop{from{transform:translateY(-14px);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes grow{from{width:0}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
@@ -67,3 +68,46 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   body::after { animation: none; opacity: 0.85; }
 }
+
+/* Botões com brilho: pílula escura com contorno fino e dois brilhos que dão sempre a volta ao contorno (mais depressa ao passar o rato).
+   Aplica-se aos botões que não têm cor de destaque (os separadores selecionados ficam com a cor da faixa). */
+@property --shine-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes shine-spin{to{--shine-a:360deg}}
+.shine:not([aria-selected="true"]){
+  --shine-dim:rgba(243,233,210,0.16);
+  --shine-hi:#fffaf0;
+  border:1px solid transparent !important;
+  background:
+    linear-gradient(180deg,#2a2234 0%,#19141f 55%,#141019 100%) padding-box,
+    conic-gradient(from calc(var(--shine-a) - 45deg),
+      var(--shine-dim) 0deg, var(--shine-hi) 45deg, var(--shine-dim) 90deg,
+      var(--shine-dim) 180deg, var(--shine-hi) 225deg, var(--shine-dim) 270deg,
+      var(--shine-dim) 360deg) border-box !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 6px 18px rgba(0,0,0,0.35);
+  transition:box-shadow .3s ease,transform .15s ease;
+  animation:shine-spin 4s linear infinite;
+}
+.shine:not([aria-selected="true"]):hover,
+.shine:not([aria-selected="true"]):focus-visible{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 0 18px rgba(255,240,210,0.12),0 6px 18px rgba(0,0,0,0.35);
+}
+.shine:not([aria-selected="true"]):active{transform:scale(0.97)}
+
+/* Botões de avançar: adaptado do "Cursor Edge Glow Button" do MicroKit
+   (https://github.com/henriquegpb/microkit). Copyright (c) 2026 Henrique Barone. Licença MIT.
+   Uma luz dentro do botão segue o rato com efeito de mola (js/botoes.js); quando chega a uma ponta,
+   acende-se por fora dessa ponta um brilho laranja. */
+.eg-wrap{position:relative;z-index:10;display:inline-flex;align-items:center}
+.eg-glow{pointer-events:none;position:absolute;left:50%;top:50%;box-sizing:border-box;height:calc(100% + 9px);width:calc(100% + 9px);border-radius:999px;border:3px solid transparent;will-change:transform;transform:translate(-50%,-50%)}
+.eg-glow.eg-esq{opacity:0;transform:translate(-50%,-50%) scaleX(-1)}
+.eg-l1,.eg-l2,.eg-l4{position:absolute;box-sizing:content-box;height:100%;width:100%;border-radius:999px;border-style:solid;border-color:transparent}
+.eg-l1{left:-3px;top:-3px;z-index:20;border-width:3px;filter:blur(15px);background:linear-gradient(transparent,transparent) padding-box,linear-gradient(91.88deg,rgba(255,137,100,.2) 46.45%,#cd3100 98.59%) border-box}
+.eg-l2{left:-2px;top:-2px;z-index:10;border-width:2px;filter:blur(2px);background:linear-gradient(transparent,transparent) padding-box,linear-gradient(97.68deg,rgba(255,177,153,0) 38.1%,rgba(255,177,153,.2) 82.47%,#ff7950 93.3%) border-box}
+.eg-l3{position:relative;display:block;box-sizing:border-box;height:100%;width:100%;border-radius:999px;border:1px solid transparent;background:linear-gradient(transparent,transparent) padding-box,linear-gradient(103.7deg,rgba(188,155,143,.1) 38.66%,rgba(233,132,99,.1) 68.55%,#e98463 85.01%,#fff 92.12%) border-box}
+.eg-l4{left:-2px;top:-2px;z-index:30;border-width:2px;filter:blur(7px);background:linear-gradient(transparent,transparent) padding-box,linear-gradient(91.96deg,rgba(255,177,153,0) 6.11%,rgba(255,177,153,.2) 53.57%,#ff7950 93.6%) border-box}
+.eg-btn{position:relative;z-index:10;box-sizing:border-box;display:flex;height:48px;cursor:pointer;align-items:center;justify-content:center;gap:8px;overflow:hidden;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:#d1d1d1;padding:0 2.6rem;font-size:14px;font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:-.015em;color:#5a250a;transition:color .2s cubic-bezier(.4,0,.2,1)}
+.eg-btn:focus-visible{outline:2px solid #ff8964;outline-offset:8px}
+.eg-luz{position:absolute;left:50%;top:0;z-index:-10;margin-left:-102px;display:flex;height:100%;width:204px;align-items:center;justify-content:center;--light-x:120px;transform:translateX(var(--light-x)) translateZ(0)}
+.eg-luz1,.eg-luz2{position:absolute;top:50%;transform:translateY(-50%)}
+.eg-luz1{height:121px;width:121px;background:radial-gradient(50% 50% at 50% 50%,#fffff5 3.5%,#ffaa81 26.5%,#ffda9f 37.5%,rgba(255,170,129,.5) 49%,rgba(210,106,58,0) 92.5%)}
+.eg-luz2{height:103px;width:204px;filter:blur(5px);background:radial-gradient(43.3% 44.23% at 50% 49.51%,#fffff7 29%,#fffacd 48.5%,#f4d2bf 60.71%,rgba(214,211,210,0) 100%)}

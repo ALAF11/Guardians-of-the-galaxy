@@ -190,9 +190,9 @@ class Component extends DCLogic {
     const T = [
       { side: 'A', title: 'The Origin', platform: 'Comics', short: 'Comics', color: '#e8a33d',
         works: [
-          { label: 'Original team', year: '1969', note: 'First appears in Marvel Super-Heroes #18: a group of rebels from the 31st century who fight for the freedom of the galaxy.', img: '[Cover: Marvel Super-Heroes #18]', fact: 'Yondu was already part of the original 1969 team, but as a hero from the 31st century.' },
-          { label: 'Star-Lord’s debut', year: '1976', note: 'Peter Quill appears for the first time, many years before he joins the team.', img: '[Cover: Marvel Preview #4]', fact: 'Star-Lord was created by Steve Englehart and spent decades away from the Guardians.' },
-          { label: 'New team', year: '2008', note: 'Dan Abnett and Andy Lanning bring together Star-Lord, Gamora, Drax, Rocket and Groot. This is the team the films will adapt.', img: '[Cover: Guardians of the Galaxy #1, 2008]', fact: 'Rocket’s name was inspired by the Beatles song Rocky Raccoon.' }
+          { label: 'Original team', year: '1969', src: '01-comics-1969.jpg', note: 'First appears in Marvel Super-Heroes #18: a group of rebels from the 31st century who fight for the freedom of the galaxy.', img: '[Cover: Marvel Super-Heroes #18]', fact: 'Yondu was already part of the original 1969 team, but as a hero from the 31st century.' },
+          { label: 'Star-Lord’s debut', year: '1976', src: '01-comics-1976.jpg', note: 'Peter Quill appears for the first time, many years before he joins the team.', img: '[Cover: Marvel Preview #4]', fact: 'Star-Lord was created by Steve Englehart and spent decades away from the Guardians.' },
+          { label: 'New team', year: '2008', src: '01-comics-2008.jpg', note: 'Dan Abnett and Andy Lanning bring together Star-Lord, Gamora, Drax, Rocket and Groot. This is the team the films will adapt.', img: '[Cover: Guardians of the Galaxy #1, 2008]', fact: 'Rocket’s name was inspired by the Beatles song Rocky Raccoon.' }
         ],
         links: [
           { to: 1, text: 'Gives the films the 2008 team: the line-up, the humor and the characters.' },
@@ -201,9 +201,9 @@ class Component extends DCLogic {
         ] },
       { side: 'A', title: 'The Big Screen', platform: 'Films', short: 'Films', color: '#e8893d',
         works: [
-          { label: 'Vol. 1', year: '2014', note: 'Peter Quill brings together a group of outlaws to protect an Infinity Stone. A family is born.', img: '[Poster: Vol. 1]', fact: 'James Gunn wrote and directed all three films, which gives the trilogy a single voice.' },
-          { label: 'Vol. 2', year: '2017', note: 'Peter meets his father, Ego, and realizes that his real family is the one he chose.', img: '[Poster: Vol. 2]', fact: 'Ego, Peter’s father, is literally a living planet.' },
-          { label: 'Vol. 3', year: '2023', note: 'Rocket’s origin and the farewell of this version of the team.', img: '[Poster: Vol. 3]', fact: 'Vol. 3 finally tells Rocket’s origin, which had been held back since the first film.' }
+          { label: 'Vol. 1', year: '2014', src: '02-films-vol1.jpg', note: 'Peter Quill brings together a group of outlaws to protect an Infinity Stone. A family is born.', img: '[Poster: Vol. 1]', fact: 'James Gunn wrote and directed all three films, which gives the trilogy a single voice.' },
+          { label: 'Vol. 2', year: '2017', src: '02-films-vol2.jpg', note: 'Peter meets his father, Ego, and realizes that his real family is the one he chose.', img: '[Poster: Vol. 2]', fact: 'Ego, Peter’s father, is literally a living planet.' },
+          { label: 'Vol. 3', year: '2023', src: '02-films-vol3.jpg', note: 'Rocket’s origin and the farewell of this version of the team.', img: '[Poster: Vol. 3]', fact: 'Vol. 3 finally tells Rocket’s origin, which had been held back since the first film.' }
         ],
         links: [
           { to: 5, text: 'The tapes in the story become real albums: the films create the soundtrack.' },
@@ -212,9 +212,9 @@ class Component extends DCLogic {
         ] },
       { side: 'A', title: 'Crossover', platform: 'Marvel Universe', short: 'Crossover', color: '#e86a8a',
         works: [
-          { label: 'Infinity War', year: '2018', note: 'The Guardians meet Thor and join the war against Thanos, Gamora’s adoptive father.', img: '[Image: the Guardians with Thor]', fact: 'Thor spends the whole film calling Rocket a rabbit.' },
-          { label: 'Endgame', year: '2019', note: 'The team fights in the final battle, and a Gamora from the past comes back.', img: '[Image: the final battle]', fact: 'The Gamora who comes back is from 2014 and does not know the Guardians.' },
-          { label: 'Love and Thunder', year: '2022', note: 'Thor travels with the Guardians at the start of the film, before they go their separate ways.', img: '[Image: Thor with the Guardians]', fact: 'It is the last time Thor and the Guardians share the screen before Vol. 3.' }
+          { label: 'Infinity War', year: '2018', src: '03-crossover-infinity-war.jpg', pos: 'center', note: 'The Guardians meet Thor and join the war against Thanos, Gamora’s adoptive father.', img: '[Image: the Guardians with Thor]', fact: 'Thor spends the whole film calling Rocket a rabbit.' },
+          { label: 'Endgame', year: '2019', src: '03-crossover-endgame.jpg', note: 'The team fights in the final battle, and a Gamora from the past comes back.', img: '[Image: the final battle]', fact: 'The Gamora who comes back is from 2014 and does not know the Guardians.' },
+          { label: 'Love and Thunder', year: '2022', src: '03-crossover-love-and-thunder.jpg', pos: '70% center', note: 'Thor travels with the Guardians at the start of the film, before they go their separate ways.', img: '[Image: Thor with the Guardians]', fact: 'It is the last time Thor and the Guardians share the screen before Vol. 3.' }
         ],
         links: [
           { to: 1, text: 'What happens to Gamora in Infinity War changes the direction of Vol. 3.' },
@@ -223,10 +223,10 @@ class Component extends DCLogic {
         ] },
       { side: 'B', title: 'Short Stories', platform: 'Animation and Disney+', short: 'Animation', color: '#4fb8ab',
         works: [
-          { label: 'Animated series', year: '2015', note: 'Weekly adventures on Disney XD, with a tone made for a younger audience.', img: '[Image: animated series]', fact: 'The series premiered about a year after Vol. 1, to build on the success of the film.' },
-          { label: 'What If...?', year: '2021', note: 'Imagines other versions of the Marvel universe.', img: '[Image: What If...?]', fact: 'In one episode, it is T’Challa, not Peter, who is taken by Yondu and becomes Star-Lord.' },
-          { label: 'I Am Groot', year: '2022', note: 'Shorts of a few minutes with Baby Groot, almost without dialogue.', img: '[Image: I Am Groot]', fact: 'Each short lasts only a few minutes and tells its story almost only with images and sound.' },
-          { label: 'Holiday Special', year: '2022', note: 'A Christmas special set before Vol. 3 that adds context to Peter’s story.', img: '[Image: Holiday Special]', fact: 'The Christmas present the team gets for Peter is the actor Kevin Bacon.' }
+          { label: 'Animated series', year: '2015', src: '04-animation-series.jpg', note: 'Weekly adventures on Disney XD, with a tone made for a younger audience.', img: '[Image: animated series]', fact: 'The series premiered about a year after Vol. 1, to build on the success of the film.' },
+          { label: 'What If...?', year: '2021', src: '04-animation-what-if.jpg', note: 'Imagines other versions of the Marvel universe.', img: '[Image: What If...?]', fact: 'In one episode, it is T’Challa, not Peter, who is taken by Yondu and becomes Star-Lord.' },
+          { label: 'I Am Groot', year: '2022', src: '04-animation-i-am-groot.jpg', note: 'Shorts of a few minutes with Baby Groot, almost without dialogue.', img: '[Image: I Am Groot]', fact: 'Each short lasts only a few minutes and tells its story almost only with images and sound.' },
+          { label: 'Holiday Special', year: '2022', src: '04-animation-holiday-special.jpg', note: 'A Christmas special set before Vol. 3 that adds context to Peter’s story.', img: '[Image: Holiday Special]', fact: 'The Christmas present the team gets for Peter is the actor Kevin Bacon.' }
         ],
         links: [
           { to: 1, text: 'The Holiday Special bridges the films and sets up Vol. 3.' },
@@ -235,8 +235,8 @@ class Component extends DCLogic {
         ] },
       { side: 'B', title: 'You Are Star-Lord', platform: 'Video games', short: 'Games', color: '#8f8cf0',
         works: [
-          { label: 'Telltale Series', year: '2017', note: 'A story-driven adventure in episodes, where the player’s choices change the story.', img: '[Cover: Telltale Series]', fact: 'It was released in five episodes over several months, like a TV series.' },
-          { label: 'Marvel’s Guardians of the Galaxy', year: '2021', note: 'An action game by Eidos-Montréal: you are Peter and you lead the team in an original story.', img: '[Cover: 2021 game]', fact: 'In this game, Peter is a huge fan of a fictional 1980s band called Star-Lord, with original songs.' }
+          { label: 'Telltale Series', year: '2017', src: '05-games-telltale.jpg', note: 'A story-driven adventure in episodes, where the player’s choices change the story.', img: '[Cover: Telltale Series]', fact: 'It was released in five episodes over several months, like a TV series.' },
+          { label: 'Marvel’s Guardians of the Galaxy', year: '2021', src: '05-games-2021.jpg', note: 'An action game by Eidos-Montréal: you are Peter and you lead the team in an original story.', img: '[Cover: 2021 game]', fact: 'In this game, Peter is a huge fan of a fictional 1980s band called Star-Lord, with original songs.' }
         ],
         links: [
           { to: 1, text: 'Creates a third version of the story: neither the films’ nor the comics’.' },
@@ -245,9 +245,9 @@ class Component extends DCLogic {
         ] },
       { side: 'B', title: 'The Soundtrack', platform: 'Music', short: 'Music', color: '#f0c75e',
         works: [
-          { label: 'Awesome Mix Vol. 1', year: '2014', note: 'The tape Peter’s mother left him: his link to Earth.', img: '[Cover: Awesome Mix Vol. 1]', fact: 'It reached No. 1 on the Billboard 200 album chart in the United States with only old songs.' },
-          { label: 'Awesome Mix Vol. 2', year: '2017', note: 'The second tape, the last gift from Peter’s mother.', img: '[Cover: Awesome Mix Vol. 2]', fact: 'The Vol. 2 tape appears at the end of the first film, as a gift his mother had kept for him.' },
-          { label: 'Awesome Mix Vol. 3', year: '2023', note: 'The soundtrack moves forward in time, with more recent songs.', img: '[Cover: Awesome Mix Vol. 3]', fact: 'At the end of Vol. 2, Peter gets a Zune: the music no longer fits on a tape.' }
+          { label: 'Awesome Mix Vol. 1', year: '2014', src: '06-music-vol1.jpg', note: 'The tape Peter’s mother left him: his link to Earth.', img: '[Cover: Awesome Mix Vol. 1]', fact: 'It reached No. 1 on the Billboard 200 album chart in the United States with only old songs.' },
+          { label: 'Awesome Mix Vol. 2', year: '2017', src: '06-music-vol2.jpg', note: 'The second tape, the last gift from Peter’s mother.', img: '[Cover: Awesome Mix Vol. 2]', fact: 'The Vol. 2 tape appears at the end of the first film, as a gift his mother had kept for him.' },
+          { label: 'Awesome Mix Vol. 3', year: '2023', src: '06-music-vol3.jpg', note: 'The soundtrack moves forward in time, with more recent songs.', img: '[Cover: Awesome Mix Vol. 3]', fact: 'At the end of Vol. 2, Peter gets a Zune: the music no longer fits on a tape.' }
         ],
         links: [
           { to: 1, text: 'The tape is an object in the story: it connects Peter to his mother.' },
@@ -256,8 +256,8 @@ class Component extends DCLogic {
         ] },
       { side: 'B', title: 'Into the Story', platform: 'Theme parks', short: 'Parks', color: '#6cc4e8',
         works: [
-          { label: 'Mission: BREAKOUT!', year: '2017', note: 'At Disney California Adventure: a drop tower where you help Rocket free the team.', img: '[Image: Mission: BREAKOUT!]', fact: 'It replaced the old Twilight Zone Tower of Terror in the same building.' },
-          { label: 'Cosmic Rewind', year: '2022', note: 'At EPCOT, Florida: a roller coaster with spinning cars and music from the 70s and 80s.', img: '[Image: Cosmic Rewind]', fact: 'The cars spin 360º and the ride starts with a launch backwards.' }
+          { label: 'Mission: BREAKOUT!', year: '2017', src: '07-parks-mission-breakout.jpg', pos: '45% center', note: 'At Disney California Adventure: a drop tower where you help Rocket free the team.', img: '[Image: Mission: BREAKOUT!]', fact: 'It replaced the old Twilight Zone Tower of Terror in the same building.' },
+          { label: 'Cosmic Rewind', year: '2022', src: '07-parks-cosmic-rewind.jpg', pos: '35% center', note: 'At EPCOT, Florida: a roller coaster with spinning cars and music from the 70s and 80s.', img: '[Image: Cosmic Rewind]', fact: 'The cars spin 360º and the ride starts with a launch backwards.' }
         ],
         links: [
           { to: 1, text: 'Takes the characters and the tone of the films into a physical space.' },
@@ -266,9 +266,9 @@ class Component extends DCLogic {
         ] },
       { side: 'Bonus', title: 'My View', platform: 'Bonus track', short: 'Me', color: '#f3e9d2',
         works: [
-          { label: 'How I found it', year: '2020', note: 'I started watching the films during the COVID-19 lockdown.', img: '[Your photo: the lockdown]', fact: 'Being at home during the lockdown is what got me into this universe.' },
-          { label: 'Favorite moment', year: 'Vol. 2', note: 'Every moment with Groot, above all Baby Groot dancing at the start of Vol. 2 while the team fights a giant monster.', img: '[Image: Baby Groot dancing, Vol. 2]', fact: 'In that scene, Baby Groot dances to Mr. Blue Sky, by Electric Light Orchestra.' },
-          { label: 'Next stop', year: '2026', note: 'Each platform makes me want the next one. I have never played the games, so that is my next stop.', img: '[Image: the 2021 game]', fact: 'The 2021 game is the platform I want to try next.' }
+          { label: 'How I found it', year: '2020', src: '08-me-2020.jpg', note: 'I started watching the films during the COVID-19 lockdown.', img: '[Your photo: the lockdown]', fact: 'Being at home during the lockdown is what got me into this universe.' },
+          { label: 'Favorite moment', year: 'Vol. 2', src: '08-me-baby-groot.jpg', pos: '52% center', zoom: 1.35, note: 'Every moment with Groot, above all Baby Groot dancing at the start of Vol. 2 while the team fights a giant monster.', img: '[Image: Baby Groot dancing, Vol. 2]', fact: 'In that scene, Baby Groot dances to Mr. Blue Sky, by Electric Light Orchestra.' },
+          { label: 'Next stop', year: '2026', src: '08-me-next-stop.jpg', pos: 'center', note: 'Each platform makes me want the next one. I have never played the games, so that is my next stop.', img: '[Image: the 2021 game]', fact: 'The 2021 game is the platform I want to try next.' }
         ],
         links: [] }
     ];
@@ -323,7 +323,9 @@ class Component extends DCLogic {
       };
     });
 
-    const pola = c.works[sel];
+    // Fotografia da obra: a imagem de img/ quando existe; senão, o texto do que falta
+    const work = c.works[sel];
+    const pola = Object.assign({}, work, { src: work.src ? 'img/' + work.src : '', noSrc: !work.src, pos: work.pos || 'center top', zoom: work.zoom || 1 });
     const polaRots = [-3, 2.5, -1.5, 3];
     const polaDots = c.works.map((w, k) => ({ color: k === sel ? c.color : '#3a3145' }));
 
