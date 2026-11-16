@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07050c">
+  <title>Awesome Mix · Phone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(ellipse 80% 45% at 10% 10%, rgba(120, 50, 170, 0.32), transparent 70%),
+        radial-gradient(ellipse 70% 40% at 90% 90%, rgba(200, 60, 120, 0.22), transparent 70%),
+        #07050c;
+      color: #f3e9d2;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    main {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: max(20px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .etiqueta {
+      background: #f3e9d2;
+      color: #17131f;
+      border-radius: 14px;
+      padding: 14px 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 0 0 8px #2b2433, 0 20px 40px rgba(0, 0, 0, 0.5);
+      margin: 8px 8px 0;
+    }
+    .etiqueta strong { font-family: 'Righteous', sans-serif; font-weight: 400; font-size: 22px; line-height: 1.1; }
+    .riscas { display: flex; flex-direction: column; gap: 4px; }
+    .riscas span { height: 6px; border-radius: 3px; }
+    .mono { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #b8ab92; margin: 0; }
+    .cartao {
+      background: #201a29;
+      border: 1px solid #3a3145;
+      border-radius: 22px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: subir 0.35s ease-out;
+    }
+    h1 { margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: 30px; line-height: 1.15; }
+    p { margin: 0; font-size: 17px; line-height: 1.5; color: #d9cdb4; }
+    .carretos { display: flex; justify-content: center; gap: 48px; padding: 10px 0 4px; }
+    .carretos span {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 6px solid #3a3145; background: #f3e9d2;
+      background-image: conic-gradient(#2b2433 0 12%, transparent 12% 33%, #2b2433 33% 45%, transparent 45% 66%, #2b2433 66% 78%, transparent 78%);
+      animation: rodar 2.4s linear infinite;
+    }
+    .barra { height: 10px; border-radius: 5px; background: #3a3145; overflow: hidden; }
+    .barra div { height: 100%; border-radius: 5px; transition: width 0.25s linear; }
+    .topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .segundos { font-family: 'Righteous', sans-serif; font-size: 34px; line-height: 1; }
+    .opcoes { display: flex; flex-direction: column; gap: 12px; }
+    .opcoes button {
+      min-height: 66px;
+      padding: 12px 18px;
+      border: 2px solid var(--cor);
+      border-radius: 18px;
+      background: #2b2433;
+      color: #f3e9d2;
+      font: inherit;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .opcoes button:active, .opcoes button.escolhida { background: var(--cor); color: #17131f; }
+    .opcoes button:disabled { opacity: 0.6; }
+    .resposta { align-self: flex-start; padding: 8px 16px; border-radius: 999px; color: #17131f; font-weight: 700; font-size: 18px; }
+    .ponto { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #4fb8ab; margin-right: 8px; animation: piscar 1.6s ease-in-out infinite; }
+    @keyframes rodar { to { transform: rotate(360deg); } }
+    @keyframes subir { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes piscar { 50% { opacity: 0.3; } }
+    @media (prefers-reduced-motion: reduce) {
+      .carretos span, .ponto, .cartao { animation: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="etiqueta">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+      <strong>Guardians of the Galaxy</strong>
+      <span class="mono" style="color: #17131f; font-weight: 600; letter-spacing: 0.08em">VOL. TRANSMEDIA</span>
+    </div>
+    <div class="riscas"><span style="background: #d9622b"></span><span style="background: #e8a33d"></span><span style="background: #2a8c80"></span></div>
+  </div>
+  <section id="ecra" aria-live="polite"></section>
+</main>
+
+<script src="config.js?v=2"></script>
+<script src="perguntas.js?v=2"></script>
+<script src="votacao.js?v=2"></script>
+<script>
+(function () {
+  'use strict';
+
+  const P = window.PERGUNTAS;
+  const DUR = window.Votacao.duracao * 1000;
+  const votante = window.Votacao.idVotante();
+  const ecra = document.getElementById('ecra');
+  let api = null;
+  let live = null;
+  let ultima = null; // a última pergunta aberta nesta sessão, para mostrar o resultado depois de fechar
+  let ultimo = '';
+  let contagem = null;
+
+  function esc(t) {
+    return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+  function chave(sessao, q) { return 'awesome-mix-voto:' + sessao + ':' + q; }
+  function lembrado(sessao, q) {
+    try { const v = localStorage.getItem(chave(sessao, q)); return v === null ? null : Number(v); } catch (e) { return null; }
+  }
+  function guardar(sessao, q, o) {
+    try { localStorage.setItem(chave(sessao, q), String(o)); } catch (e) { /* sem armazenamento */ }
+  }
+  function mostrar(html) { ecra.innerHTML = '<div class="cartao">' + html + '</div>'; }
+  function titulo(p) { return '<p class="mono" style="color: ' + p.cor + '">' + esc(p.faixa) + '</p>'; }
+
+  // Depois de o tempo acabar: certo, errado ou sem resposta, e qual era a certa
+  function resultado(u) {
+    const p = P[Number(u.q)];
+    const ja = lembrado(u.sessao, u.q);
+    const certa = '<span class="resposta" style="background: ' + p.cor + '">' + esc(p.opcoes[p.certa]) + '</span>';
+    let h1 = 'You didn’t answer in time';
+    if (ja === p.certa) h1 = 'Right!';
+    else if (ja !== null) h1 = 'Wrong';
+    mostrar(titulo(p) + '<h1>' + h1 + '</h1>' +
+      (ja === p.certa ? certa : '<p>The right answer was:</p>' + certa) +
+      '<p><span class="ponto"></span>Get ready for the next question.</p>');
+  }
+
+  function render() {
+    clearInterval(contagem);
+    if (!api) {
+      mostrar('<p class="mono">Connecting</p><h1>Looking for the tape…</h1><p>If this does not change, check that you are online.</p>');
+      return;
+    }
+    if (live && live.estado === 'fim') {
+      let certas = 0, respondidas = 0;
+      P.forEach(function (p, q) {
+        const v = lembrado(live.sessao, String(q));
+        if (v !== null) { respondidas += 1; if (v === p.certa) certas += 1; }
+      });
+      mostrar('<p class="mono">End of the tape</p><h1>Thank you!</h1>' +
+        (respondidas ? '<span class="resposta" style="background: #f0c75e">You got ' + certas + ' of ' + P.length + ' right</span>' : '') +
+        '<p>Look at the screen: the galaxy map now shows how many got each platform right.</p>');
+      return;
+    }
+    const aberta = live && live.estado === 'pergunta';
+    const fim = aberta ? live.abertaEm + DUR : 0;
+    if (!aberta || api.agora() >= fim) {
+      if (ultima && live && ultima.sessao === live.sessao) { resultado(ultima); return; }
+      mostrar('<p class="mono"><span class="ponto"></span>Connected to the tape</p><h1>Get ready</h1>' +
+        '<p>At the end of each track, a question about what you just heard will appear here. You have ' + (DUR / 1000) + ' seconds to answer.</p>' +
+        '<div class="carretos" aria-hidden="true"><span></span><span></span></div>');
+      return;
+    }
+
+    const p = P[Number(live.q)];
+    const ja = lembrado(live.sessao, live.q);
+    if (ja !== null) {
+      mostrar(titulo(p) + '<h1>Answer sent</h1>' +
+        '<span class="resposta" style="background: ' + p.cor + '">' + esc(p.opcoes[ja]) + '</span>' +
+        '<p>You will see if you got it right when time runs out: <strong id="seg"></strong> s.</p>');
+    } else {
+      mostrar('<div class="topo">' + titulo(p) + '<span class="segundos" id="seg"></span></div>' +
+        '<h1>' + esc(p.texto) + '</h1>' +
+        '<div class="barra"><div id="barra" style="background: ' + p.cor + '"></div></div>' +
+        '<div class="opcoes">' + p.opcoes.map(function (o, k) {
+          return '<button type="button" data-o="' + k + '" style="--cor: ' + p.cor + '">' + esc(o) + '</button>';
+        }).join('') + '</div>');
+    }
+
+    const seg = document.getElementById('seg');
+    const barra = document.getElementById('barra');
+    function atualizar() {
+      const resta = fim - api.agora();
+      if (resta <= 0) { render(); return; }
+      seg.textContent = Math.ceil(resta / 1000);
+      if (barra) barra.style.width = (100 * resta / DUR).toFixed(1) + '%';
+    }
+    atualizar();
+    contagem = setInterval(atualizar, 200);
+
+    ecra.querySelectorAll('[data-o]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        const o = Number(b.getAttribute('data-o'));
+        const desta = live;
+        ecra.querySelectorAll('[data-o]').forEach(function (x) { x.disabled = true; });
+        b.classList.add('escolhida');
+        api.votar(desta.sessao, desta.q, votante, o)
+          .then(function () { guardar(desta.sessao, desta.q, o); if (live === desta) render(); })
+          .catch(function () {
+            if (live !== desta) return;
+            clearInterval(contagem);
+            mostrar(titulo(p) + '<h1>Time’s up</h1><p>Your answer arrived too late. Get ready for the next one.</p>');
+          });
+      });
+    });
+  }
+
+  render();
+  window.Votacao.ligar().then(function (ligacao) {
+    if (!ligacao) {
+      mostrar('<p class="mono">No connection</p><h1>Could not connect</h1><p>Check that you are online and reload the page.</p>');
+      return;
+    }
+    api = ligacao;
+    api.entrar(votante);
+    api.aoVivo(function (v) {
+      // Só redesenha quando a pergunta muda (no modo local, qualquer voto também avisa)
+      const novo = JSON.stringify(v);
+      if (novo === ultimo) return;
+      const nova = v && v.estado === 'pergunta' && (!live || live.q !== v.q || live.estado !== 'pergunta');
+      ultimo = novo;
+      live = v;
+      if (v && v.estado === 'pergunta') ultima = { sessao: v.sessao, q: v.q };
+      if (nova && navigator.vibrate) navigator.vibrate(120);
+      render();
+    });
+  });
+})();
+</script>
+</body>
+</html>

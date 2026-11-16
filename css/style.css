@@ -1,0 +1,69 @@
+/* Estilos base do protótipo do canvas (copiados tal e qual) */
+body{margin:0;background:#17131f}
+a{color:#f3e9d2}a:hover{color:#ffffff}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes eq{0%{height:18%}50%{height:100%}100%{height:28%}}
+@keyframes warp{from{background-position:0 0}to{background-position:-600px 0}}
+@keyframes warpBack{from{background-position:0 0}to{background-position:600px 0}}
+@keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-3px,2px)}50%{transform:translate(3px,-2px)}75%{transform:translate(-2px,-3px)}}
+@keyframes pop{0%{transform:scale(0.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+@keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes grow{from{width:0}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
+@keyframes toast{0%{transform:translate(-50%,30px);opacity:0}15%{transform:translate(-50%,0);opacity:1}85%{transform:translate(-50%,0);opacity:1}100%{transform:translate(-50%,-10px);opacity:0}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,137,61,0.5)}50%{box-shadow:0 0 0 14px rgba(232,137,61,0)}}
+@keyframes unspool{0%{transform:rotate(0)}100%{transform:rotate(-720deg)}}
+button{font:inherit}
+input{font:inherit}
+button:focus-visible,input:focus-visible{outline:2px solid #f3e9d2;outline-offset:3px}
+
+/* ---------- Fundo de galáxia ---------- */
+/* Fixo atrás de tudo: nebulosas, uma faixa de via láctea e três camadas de estrelas a cintilar */
+
+#app { position: relative; z-index: 1; }
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 20%, rgba(120, 50, 170, 0.32), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 85% 75%, rgba(200, 60, 120, 0.22), transparent 70%),
+    radial-gradient(ellipse 40% 35% at 75% 15%, rgba(60, 150, 170, 0.16), transparent 70%),
+    radial-gradient(ellipse 35% 30% at 25% 85%, rgba(232, 137, 61, 0.1), transparent 70%),
+    linear-gradient(125deg, transparent 30%, rgba(243, 233, 210, 0.04) 45%, rgba(180, 140, 220, 0.06) 50%, rgba(243, 233, 210, 0.035) 55%, transparent 70%),
+    #07050c;
+}
+
+body::after {
+  z-index: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 25px 35px, #fff, transparent),
+    radial-gradient(1px 1px at 140px 90px, #fff, transparent),
+    radial-gradient(2px 2px at 75px 170px, rgba(108, 196, 232, 1), transparent),
+    radial-gradient(1.5px 1.5px at 210px 230px, rgba(232, 106, 138, 1), transparent),
+    radial-gradient(2.5px 2.5px at 300px 60px, rgba(240, 199, 94, 1), transparent),
+    radial-gradient(1.5px 1.5px at 380px 310px, #fff, transparent),
+    radial-gradient(1px 1px at 50px 120px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 170px 20px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 520px 400px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 260px, rgba(255, 255, 255, 0.8), transparent);
+  background-size: 240px 240px, 320px 320px, 410px 410px, 530px 530px, 670px 670px, 450px 450px, 180px 180px, 210px 210px, 760px 760px, 290px 290px;
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.45; }
+  to { opacity: 0.85; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { animation: none; opacity: 0.85; }
+}

@@ -1,0 +1,36 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "sala": {
+      "live": {
+        ".read": true,
+        ".write": true,
+        ".validate": "newData.hasChildren(['sessao', 'q', 'estado', 'abertaEm'])",
+        "sessao": { ".validate": "newData.isString() && newData.val().length < 40" },
+        "q": { ".validate": "newData.isString() && newData.val().matches(/^(-1|[0-7])$/)" },
+        "estado": { ".validate": "newData.isString() && newData.val().matches(/^(espera|pergunta|fim)$/)" },
+        "abertaEm": { ".validate": "newData.val() === now" },
+        "$outro": { ".validate": false }
+      },
+      "votos": {
+        ".read": true,
+        "$sessao": {
+          "$q": {
+            "$votante": {
+              ".write": "$sessao === root.child('sala/live/sessao').val() && $q === root.child('sala/live/q').val() && root.child('sala/live/estado').val() === 'pergunta' && now < root.child('sala/live/abertaEm').val() + 12000 && $votante.length < 40",
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 4"
+            }
+          }
+        }
+      },
+      "ligados": {
+        ".read": true,
+        "$votante": {
+          ".write": "$votante.length < 40",
+          ".validate": "newData.val() === true"
+        }
+      }
+    }
+  }
+}

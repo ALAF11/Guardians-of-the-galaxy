@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Awesome Mix Transmedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app"></div>
+
+<!-- Markup do protótipo do canvas (textos em inglês) -->
+<template id="app-template">
+<div style="min-height: 100vh; background: transparent; color: #f3e9d2; font-family: 'DM Sans', system-ui, sans-serif; box-sizing: border-box">
+<div style="max-width: 1240px; margin: 0 auto; padding: 24px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between">
+<button onClick="{{goHome}}" style="min-height: 44px; padding: 0; border: none; background: transparent; color: #f3e9d2; font-family: 'Righteous', sans-serif; font-size: 20px; cursor: pointer">Awesome Mix <span style="color: {{accent}}">· Vol. Transmedia</span></button>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<sc-if value="{{showTimer}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 6px 0 16px; border-radius: 999px; background: #2b2433; border: 1px solid {{timerBorder}}">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #b8ab92">TAPE</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600; color: {{timerColor}}; {{timerAnim}}">{{timerText}}</span>
+<span style="font-size: 12px; color: #b8ab92">left</span>
+<button onClick="{{toggleTimer}}" style="min-height: 34px; padding: 0 12px; border: none; border-radius: 999px; background: #3a3145; color: #f3e9d2; font-size: 13px; cursor: pointer">{{timerLabel}}</button>
+<button onClick="{{resetTimer}}" aria-label="Reset the timer" style="min-height: 34px; padding: 0 10px; border: none; border-radius: 999px; background: transparent; color: #b8ab92; font-size: 13px; cursor: pointer">Reset</button>
+</div>
+</sc-if>
+</div>
+</div>
+
+<sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 26px; align-items: center; text-align: center">
+<header style="display: flex; flex-direction: column; gap: 10px; align-items: center">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #b8ab92">MDMI · Interactive Visual Narratives 2 · Transmedia Storytelling</div>
+<h1 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 54px); line-height: 1.05">Guardians of the Galaxy: <span style="color: {{accent}}">8 tracks, 7 minutes</span></h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; color: #d9cdb4; max-width: 780px">One tape, eight tracks, seven platforms. Once the tape starts running, we have seven minutes to hear the whole universe. When the tape runs out... it’s over.</p>
+</header>
+
+<div style="width: 100%; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: center">
+<div style="width: min(100%, 860px, max(320px, calc((100vh - 370px) * 1.6))); container-type: inline-size">
+<div style="background: #2b2433; border-radius: 3.5cqw; padding: 3.7cqw 3.7cqw 0; box-sizing: border-box; box-shadow: 0 30px 60px rgba(0,0,0,0.45)">
+<div style="background: #f3e9d2; border-radius: 2.1cqw; padding: 3.3cqw 3.7cqw 2.6cqw; color: #17131f; display: flex; flex-direction: column; gap: 2.6cqw">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1.4cqw">
+<div style="font-family: 'Righteous', sans-serif; font-size: 5.1cqw; line-height: 1.1">Guardians of the Galaxy</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 2cqw; font-weight: 600; white-space: nowrap">SIDE A/B</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 0.7cqw">
+<div style="height: 1.3cqw; border-radius: 0.7cqw; background: #d9622b"></div>
+<div style="height: 1.3cqw; border-radius: 0.7cqw; background: #e8a33d"></div>
+<div style="height: 1.3cqw; border-radius: 0.7cqw; background: #2a8c80"></div>
+</div>
+<div style="background: #17131f; border-radius: 10.5cqw; padding: 2.3cqw 4.7cqw; display: flex; align-items: center; justify-content: space-between; gap: 2.8cqw">
+<div style="width: 19%; aspect-ratio: 1 / 1; flex-shrink: 0; border-radius: 50%; background: #f3e9d2; border: 1.2cqw solid #3a3145; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+<div style="{{reelAnim}}; width: 70%; height: 70%; display: flex">
+<svg width="100%" height="100%" viewBox="0 0 60 60" aria-hidden="true"><g fill="#2b2433"><rect x="27" y="3" width="6" height="15" rx="2"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(60 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(120 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(180 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(240 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(300 30 30)"></rect><circle cx="30" cy="30" r="10"></circle></g><circle cx="30" cy="30" r="4" fill="#f3e9d2"></circle></svg>
+</div>
+</div>
+<div style="flex: 1; height: 7.4cqw; border-radius: 1.2cqw; background: #5a3a26; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 1.9cqw; letter-spacing: 0.16em; color: #e8c9a4">{{tapeLabel}}</div>
+<div style="width: 19%; aspect-ratio: 1 / 1; flex-shrink: 0; border-radius: 50%; background: #f3e9d2; border: 1.2cqw solid #3a3145; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+<div style="{{reelAnim}}; width: 70%; height: 70%; display: flex">
+<svg width="100%" height="100%" viewBox="0 0 60 60" aria-hidden="true"><g fill="#2b2433"><rect x="27" y="3" width="6" height="15" rx="2"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(60 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(120 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(180 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(240 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(300 30 30)"></rect><circle cx="30" cy="30" r="10"></circle></g><circle cx="30" cy="30" r="4" fill="#f3e9d2"></circle></svg>
+</div>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 1.75cqw; font-weight: 600">
+<span>VOL. TRANSMEDIA</span><span>{{visitedCount}}/8 PLAYED</span>
+</div>
+</div>
+<div style="margin: 2.8cqw auto 0; width: 70%; height: 6.7cqw; background: #3a3145; clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%); display: flex; align-items: center; justify-content: space-evenly">
+<div style="width: 2.1cqw; height: 2.1cqw; border-radius: 50%; background: #17131f"></div>
+<div style="width: 2.1cqw; height: 2.1cqw; border-radius: 50%; background: #17131f"></div>
+</div>
+</div>
+</div>
+
+<sc-if value="{{votacaoOn}}" hint-placeholder-val="{{ false }}">
+<div style="flex: 0 0 262px; padding: 16px 18px; border-radius: 22px; background: #201a29; border: 1px solid #3a3145; box-sizing: border-box; display: flex; flex-direction: column; gap: 9px; align-items: center; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.45); animation: rise 0.4s ease-out">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: {{accent}}">SCAN TO PLAY THE QUIZ</div>
+<sc-if value="{{qrSrc}}" hint-placeholder-val="{{ false }}">
+<img src="{{qrSrc}}" alt="QR code for the voting page" style="display: block; width: 148px; height: 148px; border-radius: 12px; border: 6px solid #f3e9d2; box-sizing: border-box">
+</sc-if>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92; overflow-wrap: anywhere">{{votoUrlCurto}}</div>
+<ol style="align-self: stretch; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; text-align: left; font-size: 14px; line-height: 1.3; color: #d9cdb4">
+<li style="display: flex; gap: 8px"><b style="color: {{accent}}">1</b>A question after each track</li>
+<li style="display: flex; gap: 8px"><b style="color: {{accent}}">2</b>{{votoDur}} seconds to answer</li>
+<li style="display: flex; gap: 8px"><b style="color: {{accent}}">3</b>Your results on the final map</li>
+</ol>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #4fb8ab"><span style="width: 9px; height: 9px; border-radius: 50%; background: #4fb8ab; animation: blink 1.6s ease-in-out infinite"></span>{{ligadosTexto}}</div>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center">
+<button onClick="{{start}}" style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 24px; border: none; border-radius: 999px; background: {{accent}}; color: #17131f; font-weight: 700; font-size: 17px; cursor: pointer; animation: pulse 2.2s ease-in-out infinite">
+<svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><path d="M1 1l12 7-12 7z" fill="#17131f"></path></svg>
+{{startLabel}}
+</button>
+<button onClick="{{openList}}" style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 22px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 16px; cursor: pointer">
+<svg width="18" height="16" viewBox="0 0 18 16" aria-hidden="true"><path d="M1 3h16M1 8h16M1 13h10" fill="none" stroke="#f3e9d2" stroke-width="1.8" stroke-linecap="round"></path></svg>
+Side A · Side B
+</button>
+<button onClick="{{toggleFullscreen}}" style="display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 22px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 16px; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 5V1h4M11 1h4v4M15 11v4h-4M5 15H1v-4" fill="none" stroke="#f3e9d2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+{{fullscreenLabel}}
+</button>
+<button onClick="{{openMap}}" style="min-height: 50px; padding: 0 22px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 16px; cursor: pointer">Galaxy map</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isTrack}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
+<button onClick="{{goHome}}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 15px; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+Back to the tape
+</button>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 2px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.12em; color: #b8ab92">{{cur.sideLabel}} · TRACK {{cur.num}} / 08</div>
+<div style="font-size: 14px; font-weight: 700; color: {{paceColor}}">{{paceText}}</div>
+</div>
+<button onClick="{{togglePlay}}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 15px; cursor: pointer">
+<span style="width: 26px; height: 26px; border-radius: 50%; background: #f3e9d2; display: flex; align-items: center; justify-content: center"><span style="{{reelAnim}}; width: 18px; height: 18px; display: flex"><svg width="18" height="18" viewBox="0 0 60 60" aria-hidden="true"><g fill="#2b2433"><rect x="26" y="3" width="8" height="16" rx="2"></rect><rect x="26" y="3" width="8" height="16" rx="2" transform="rotate(120 30 30)"></rect><rect x="26" y="3" width="8" height="16" rx="2" transform="rotate(240 30 30)"></rect><circle cx="30" cy="30" r="11"></circle></g></svg></span></span>
+{{playLabel}}
+</button>
+</div>
+
+<div style="display: flex; gap: 6px">
+<sc-for list="{{all}}" as="seg" hint-placeholder-count="8">
+<button onClick="{{seg.pick}}" aria-label="Go to track {{seg.num}}" style="flex: 1; height: 24px; padding: 0; border: none; background: transparent; cursor: pointer; display: flex; align-items: center">
+<span style="display: block; width: 100%; height: 8px; border-radius: 4px; background: {{seg.segColor}}"></span>
+</button>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: {{cur.color}}">{{cur.platform}}</div>
+<h2 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(38px, 5vw, 60px); line-height: 1.02">{{cur.title}}</h2>
+</div>
+<div role="tablist" aria-label="Steps in this track" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{tabs}}" as="tb" hint-placeholder-count="3">
+<button role="tab" aria-selected="{{tb.sel}}" onClick="{{tb.pick}}" style="min-height: 44px; padding: 0 14px; border: 1px solid {{tb.border}}; border-radius: 999px; background: {{tb.bg}}; color: {{tb.fg}}; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 400; opacity: 0.8">{{tb.n}}</span>{{tb.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 56px; align-items: stretch">
+<div style="flex: 1 1 640px; min-width: 0; min-height: 440px; background: #201a29; border: 1px solid #3a3145; border-radius: 22px; padding: 26px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+
+<sc-if value="{{t0}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px; animation: rise 0.35s ease-out">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: {{cur.color}}">TIMELINE OF THE WORKS</div>
+<div style="font-size: 14px; color: #b8ab92">Tap a work: the photo changes with it</div>
+</div>
+<div style="position: relative; display: flex; justify-content: space-between; gap: 8px; padding: 6px 4px">
+<div style="position: absolute; left: 40px; right: 40px; top: 38px; height: 6px; border-radius: 3px; background: #5a3a26"></div>
+<div style="position: absolute; left: 40px; top: 38px; height: 6px; border-radius: 3px; background: {{cur.color}}; width: {{timelineFill}}; transition: width 0.5s ease-out"></div>
+<sc-for list="{{cur.works}}" as="w" hint-placeholder-count="3">
+<button onClick="{{w.pick}}" aria-label="Open {{w.label}}" style="position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: none; background: transparent; color: #f3e9d2; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<span style="width: 68px; height: 68px; border-radius: 50%; background: {{w.dot}}; border: 4px solid {{w.ring}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; color: {{w.dotText}}; box-shadow: {{w.glow}}; transition: all 0.25s">{{w.year}}</span>
+<span style="font-size: 14px; font-weight: 700; line-height: 1.25; text-align: center; color: {{w.labelColor}}">{{w.label}}</span>
+</button>
+</sc-for>
+</div>
+<div style="padding: 22px 24px; border-radius: 18px; background: #2b2433; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap">
+<span style="font-family: 'Righteous', sans-serif; font-size: 30px; line-height: 1.1">{{cur.sel.label}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{cur.color}}">{{cur.sel.year}}</span>
+</div>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; color: #e6dcc6">{{cur.sel.note}}</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{t1}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px; animation: rise 0.35s ease-out">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: {{cur.color}}">CONTRIBUTION AND LINKS</div>
+<div style="font-size: 14px; color: #b8ab92">Each piece opens a portal to another platform</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+<div style="flex: 0 1 340px; min-width: 260px; display: flex; flex-direction: column; gap: 8px; align-items: center">
+<div style="position: relative; width: 100%; max-width: 340px; aspect-ratio: 1 / 1; border-radius: 20px; background-color: #120f19; background-image: radial-gradient(rgba(243,233,210,0.4) 1px, transparent 1.5px); background-size: 34px 34px">
+<sc-for list="{{conLines}}" as="cl" hint-placeholder-count="0">
+<div style="position: absolute; left: {{cl.x}}%; top: {{cl.y}}%; width: {{cl.len}}%; height: 3px; margin-top: -1.5px; border-radius: 2px; transform-origin: 0 50%; transform: rotate({{cl.deg}}deg); background: {{cl.color}}; box-shadow: 0 0 10px {{cl.color}}; animation: grow 0.7s ease-out"></div>
+</sc-for>
+<sc-for list="{{conNodes}}" as="cn" hint-placeholder-count="8">
+<div style="position: absolute; left: {{cn.x}}%; top: {{cn.y}}%; transform: translate(-50%, -50%); width: 84px; display: flex; flex-direction: column; align-items: center; gap: 4px">
+<span style="width: {{cn.size}}px; height: {{cn.size}}px; border-radius: 50%; background: {{cn.fill}}; border: 2px solid {{cn.ring}}; box-shadow: {{cn.glow}}; transition: all 0.4s"></span>
+<span style="font-size: 12px; font-weight: 700; line-height: 1.15; text-align: center; color: {{cn.labelColor}}">{{cn.label}}</span>
+</div>
+</sc-for>
+</div>
+<div style="font-size: 13px; color: #b8ab92; text-align: center">This platform’s constellation</div>
+</div>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{pieces}}" as="bt" hint-placeholder-count="3">
+<button onClick="{{bt.pick}}" aria-label="Reveal piece {{bt.n}}" style="min-height: 96px; padding: 14px 18px; border: 2px solid {{bt.border}}; border-radius: 16px; background: {{bt.bg}}; color: #f3e9d2; cursor: pointer; display: flex; align-items: center; gap: 14px; text-align: left; box-sizing: border-box">
+<sc-if value="{{bt.closed}}" hint-placeholder-val="{{ true }}">
+<span style="width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px; background: #3a3145; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 6v28M6 20h28" stroke="#f3e9d2" stroke-width="5" stroke-linecap="round"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.1em">PIECE {{bt.n}}</span><span style="font-size: 14px; color: #b8ab92">Tap to open the portal</span></span>
+</sc-if>
+<sc-if value="{{bt.open}}" hint-placeholder-val="{{ false }}">
+<span style="display: flex; flex-direction: column; gap: 8px; animation: pop 0.35s ease-out">
+<span style="align-self: flex-start; padding: 4px 12px; border-radius: 999px; background: {{bt.toColor}}; color: #17131f; font-size: 13px; font-weight: 700">{{cur.short}} → {{bt.toLabel}}</span>
+<span style="font-size: 17px; font-weight: 600; line-height: 1.4">{{bt.text}}</span>
+</span>
+</sc-if>
+</button>
+</sc-for>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 6px">
+<span style="font-size: 14px; color: #b8ab92">Portals open across the universe: <strong style="color: #f3e9d2">{{portalsOpen}}/21</strong></span>
+<button onClick="{{revealAll}}" style="min-height: 40px; padding: 0 14px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 13px; cursor: pointer">Open all</button>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="flex: 0 1 340px; min-width: 260px; box-sizing: border-box; padding: 18px 22px 0; display: flex; flex-direction: column; gap: 44px">
+<div style="position: relative; width: 100%; aspect-ratio: 4 / 5">
+<span style="position: absolute; inset: 0; background: #d9cdb4; border-radius: 6px; transform: rotate(6deg) translate(10px, 4px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); opacity: {{stackOpacity}}"></span>
+<span style="position: absolute; inset: 0; background: #e6dcc6; border-radius: 6px; transform: rotate(-5deg) translate(-8px, 6px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); opacity: {{stackOpacity}}"></span>
+<button onClick="{{toggleFlip}}" aria-label="Flip the photo" style="position: absolute; inset: 0; padding: 0; border: none; background: transparent; cursor: pointer; perspective: 1200px; transform: rotate({{polaRot}}deg); transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1)">
+<span style="position: absolute; inset: 0; display: block; transform-style: preserve-3d; transition: transform 0.7s ease; transform: rotateY({{flipDeg}}deg)">
+<span style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #f3e9d2; border-radius: 6px; padding: 14px 14px 62px; box-sizing: border-box; box-shadow: 0 18px 40px rgba(0,0,0,0.45); display: flex; flex-direction: column">
+<span style="flex: 1; border: 2px dashed #b8ab92; background: #e6dcc6; display: flex; align-items: center; justify-content: center; padding: 14px; box-sizing: border-box; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5c5068; text-align: center">{{pola.img}}</span>
+<span style="position: absolute; left: 14px; right: 14px; bottom: 12px; display: flex; flex-direction: column; gap: 2px; align-items: center">
+<span style="font-family: 'Righteous', sans-serif; font-size: 18px; color: #17131f; text-align: center; line-height: 1.1">{{pola.label}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5c5068">{{pola.year}}</span>
+</span>
+</span>
+<span style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: {{cur.color}}; border-radius: 6px; padding: 24px; box-sizing: border-box; box-shadow: 0 18px 40px rgba(0,0,0,0.45); display: flex; flex-direction: column; justify-content: center; gap: 12px; color: #17131f; text-align: left">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.12em">FUN FACT · {{pola.year}}</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 22px; line-height: 1.22">{{pola.fact}}</span>
+</span>
+</span>
+</button>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<button onClick="{{polaPrev}}" aria-label="Previous work" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #5c5068; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<div style="display: flex; gap: 6px">
+<sc-for list="{{polaDots}}" as="pd" hint-placeholder-count="3">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: {{pd.color}}; transition: background 0.3s"></span>
+</sc-for>
+</div>
+<button onClick="{{polaNext}}" aria-label="Next work" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #5c5068; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+<div style="margin-top: -26px; font-size: 14px; line-height: 1.5; color: #b8ab92; text-align: center">Tap the photo to flip it · the arrows change the work</div>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; border-top: 1px solid #3a3145; padding-top: 20px">
+<div>
+<sc-if value="{{showBack}}" hint-placeholder-val="{{ true }}">
+<button onClick="{{stepBack}}" style="min-height: 48px; padding: 0 22px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 16px; cursor: pointer">{{backLabel}}</button>
+</sc-if>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<button onClick="{{shuffle}}" style="min-height: 48px; padding: 0 20px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 16px; cursor: pointer">Shuffle</button>
+<button onClick="{{advance}}" style="min-height: 48px; padding: 0 24px; border: none; border-radius: 999px; background: {{accent}}; color: #17131f; font-weight: 700; font-size: 16px; cursor: pointer">{{advanceLabel}}</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isHidden}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px; animation: rise 0.4s ease-out">
+<button onClick="{{goHome}}" style="align-self: flex-start; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 15px; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+Back to the tape
+</button>
+<header style="display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #f0c75e">HIDDEN TRACK · END OF SIDE B</div>
+<h2 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(38px, 5vw, 62px); line-height: 1.02">The Fans: the platform nobody releases</h2>
+<p style="margin: 0; font-size: 18px; color: #d9cdb4; max-width: 720px; line-height: 1.5">Henry Jenkins calls it participatory culture: in transmedia, the audience also creates and takes the universe home.</p>
+</header>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px">
+<sc-for list="{{fanCards}}" as="fc" hint-placeholder-count="4">
+<button onClick="{{fc.pick}}" style="min-height: 210px; padding: 22px; border: 2px solid {{fc.border}}; border-radius: 18px; background: {{fc.bg}}; color: {{fc.fg}}; cursor: pointer; display: flex; flex-direction: column; justify-content: center; gap: 10px; text-align: left">
+<span style="font-family: 'Righteous', sans-serif; font-size: 26px; line-height: 1.1">{{fc.title}}</span>
+<sc-if value="{{fc.open}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 16px; line-height: 1.45; font-weight: 500; animation: fade 0.4s">{{fc.text}}</span>
+</sc-if>
+<sc-if value="{{fc.closed}}" hint-placeholder-val="{{ true }}">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #b8ab92">Tap to reveal</span>
+</sc-if>
+</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; border-top: 1px solid #3a3145; padding-top: 20px">
+<button onClick="{{hiddenBack}}" style="min-height: 48px; padding: 0 22px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 16px; cursor: pointer">Previous track</button>
+<button onClick="{{hiddenNext}}" style="min-height: 48px; padding: 0 24px; border: none; border-radius: 999px; background: {{accent}}; color: #17131f; font-weight: 700; font-size: 16px; cursor: pointer">Next track</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isMap}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<header style="display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #b8ab92">SIDE B · END OF THE TAPE</div>
+<h2 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 60px); line-height: 1.02">The Transmedia Galaxy Map</h2>
+<p style="margin: 0; font-size: 18px; color: #d9cdb4; max-width: 680px; line-height: 1.5">Each planet is one part of the universe and each line is a link between them. None of them tells the whole story; together, they make one universe.</p>
+</header>
+<div style="display: flex; flex-wrap: wrap; gap: 36px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; justify-content: center">
+<div style="position: relative; width: 100%; max-width: 640px; aspect-ratio: 1 / 1; border-radius: 24px; background-color: #120f19; background-image: radial-gradient(rgba(243,233,210,0.5) 1px, transparent 1.5px), radial-gradient(rgba(108,196,232,0.35) 1px, transparent 1.5px); background-size: 46px 46px, 73px 73px">
+<sc-for list="{{mapLinks}}" as="ml" hint-placeholder-count="0">
+<div style="position: absolute; left: {{ml.x}}%; top: {{ml.y}}%; width: {{ml.len}}%; height: 2px; margin-top: -1px; transform-origin: 0 50%; transform: rotate({{ml.deg}}deg); background: {{ml.color}}; opacity: 0.85; animation: grow 0.5s ease-out {{ml.delay}}s both"></div>
+</sc-for>
+<div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 26%; aspect-ratio: 1 / 1; border-radius: 50%; background: {{accent}}; color: #17131f; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; box-sizing: border-box; font-family: 'Righteous', sans-serif; font-size: clamp(12px, 2vw, 18px); line-height: 1.1; box-shadow: 0 0 40px rgba(232,137,61,0.55)">Guardians of the Galaxy</div>
+<sc-for list="{{mapNodes}}" as="nd" hint-placeholder-count="8">
+<button onClick="{{nd.pick}}" aria-label="Open track {{nd.num}}: {{nd.label}}" style="position: absolute; left: {{nd.x}}%; top: {{nd.y}}%; transform: translate(-50%, -50%); padding: 0; border: none; background: transparent; color: #f3e9d2; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 110px">
+<span style="width: 58px; height: 58px; border-radius: 50%; background: {{nd.fill}}; border: 3px solid {{nd.ring}}; box-shadow: {{nd.glow}}; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; color: {{nd.numColor}}">{{nd.num}}</span>
+<span style="font-size: 13px; font-weight: 700; line-height: 1.2; text-align: center; color: {{nd.labelColor}}">{{nd.label}}</span>
+<sc-if value="{{nd.pct}}" hint-placeholder-val="{{ false }}">
+<span style="padding: 2px 9px; border-radius: 999px; background: {{nd.pctColor}}; color: #17131f; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; animation: pop 0.4s ease-out">{{nd.pct}}</span>
+</sc-if>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="padding: 18px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92">{{statLabel}}</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 38px">{{statValor}}</span>
+</div>
+<div style="padding: 18px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92">LINKS</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 38px; color: #6cc4e8">24</span>
+</div>
+<div style="padding: 18px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92">PLATFORMS</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 38px">7</span>
+</div>
+<div style="padding: 18px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92">TIME USED</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 38px; color: #f0c75e">{{usedText}}</span>
+</div>
+</div>
+<sc-if value="{{turmaTexto}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 18px 20px; border-radius: 16px; background: #201a29; border: 2px solid #4fb8ab; font-size: 17px; line-height: 1.55; animation: rise 0.4s ease-out"><span style="display: block; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4fb8ab">THE CLASS · THE NUMBERS ON THE MAP ARE YOUR RIGHT ANSWERS</span>{{turmaTexto}}</div>
+</sc-if>
+<div style="padding: 18px 20px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; font-size: 17px; line-height: 1.55"><span style="display: block; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92">WHERE TO START</span>{{startPath}}</div>
+<div style="padding: 18px 20px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; font-size: 16px; line-height: 1.55; color: #d9cdb4">Peter kept his whole world on one tape. Now you have the whole map: pick a track and press Play.</div>
+<button onClick="{{rewind}}" style="min-height: 52px; padding: 0 24px; border: none; border-radius: 999px; background: {{accent}}; color: #17131f; font-weight: 700; font-size: 17px; cursor: pointer">Rewind the tape (start over)</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<sc-if value="{{listOpen}}" hint-placeholder-val="{{ false }}">
+<div onClick="{{closeList}}" style="position: fixed; inset: 0; background: rgba(10,8,14,0.82); display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; z-index: 20; animation: fade 0.2s">
+<div role="dialog" aria-label="Tape track list" onClick="{{keepList}}" style="width: 100%; max-width: 960px; max-height: 90vh; overflow-y: auto; background: #201a29; border: 2px solid #3a3145; border-radius: 22px; padding: 26px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px; animation: pop 0.3s ease-out">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: #b8ab92">TAPE TRACK LIST</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 30px">Side A · Side B</span>
+</div>
+<button onClick="{{closeList}}" aria-label="Close the track list" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #5c5068; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round"></path></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: {{accent}}">SIDE A: THE MAIN STORY</div>
+<sc-for list="{{sideA}}" as="item" hint-placeholder-count="3">
+<button onClick="{{item.pick}}" aria-label="Open track {{item.num}}: {{item.title}}" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; min-height: 60px; padding: 12px 16px; border: 1px solid {{item.border}}; border-radius: 12px; background: #201a29; color: #f3e9d2; text-align: left; cursor: pointer; box-sizing: border-box">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #b8ab92">{{item.num}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 17px; font-weight: 700">{{item.title}}</span>
+<span style="font-size: 14px; color: #b8ab92">{{item.platform}}</span>
+</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{item.markColor}}">{{item.mark}}</span>
+</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #4fb8ab">SIDE B: THE EXPANSION</div>
+<sc-for list="{{sideB}}" as="item" hint-placeholder-count="5">
+<button onClick="{{item.pick}}" aria-label="Open track {{item.num}}: {{item.title}}" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; min-height: 60px; padding: 12px 16px; border: 1px solid {{item.border}}; border-radius: 12px; background: #201a29; color: #f3e9d2; text-align: left; cursor: pointer; box-sizing: border-box">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #b8ab92">{{item.num}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 17px; font-weight: 700">{{item.title}}</span>
+<span style="font-size: 14px; color: #b8ab92">{{item.platform}}</span>
+</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{item.markColor}}">{{item.mark}}</span>
+</button>
+</sc-for>
+<button onClick="{{openHidden}}" style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; min-height: 60px; padding: 12px 16px; border: 2px dashed {{hiddenBorder}}; border-radius: 12px; background: transparent; color: #f3e9d2; text-align: left; cursor: pointer; box-sizing: border-box">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #b8ab92">{{hiddenNum}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 17px; font-weight: 700">{{hiddenTitle}}</span>
+<span style="font-size: 14px; color: #b8ab92">{{hiddenSub}}</span>
+</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #f0c75e">{{hiddenMark}}</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{votoPill}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: fixed; right: 24px; bottom: 24px; width: min(380px, calc(100vw - 48px)); padding: 16px 18px; border-radius: 18px; background: #201a29; border: 2px solid {{votoCor}}; box-shadow: 0 16px 40px rgba(0,0,0,0.55); box-sizing: border-box; z-index: 30; color: #f3e9d2; font-family: 'DM Sans', system-ui, sans-serif; display: flex; flex-direction: column; gap: 10px; animation: rise 0.35s ease-out">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: {{votoCor}}"><svg width="12" height="18" viewBox="0 0 12 18" aria-hidden="true"><rect x="1" y="1" width="10" height="16" rx="2" fill="none" stroke="{{votoCor}}" stroke-width="1.6"></rect><circle cx="6" cy="14" r="1" fill="{{votoCor}}"></circle></svg>{{votoLabel}}</span>
+<span style="font-family: 'Righteous', sans-serif; font-size: 26px; line-height: 1">{{votoSeg}}</span>
+</div>
+<div style="font-size: 17px; font-weight: 700; line-height: 1.35">{{votoTexto}}</div>
+<div style="height: 6px; border-radius: 3px; background: #3a3145; overflow: hidden"><div style="height: 100%; width: {{votoFrac}}%; background: {{votoCor}}; transition: width 0.25s linear"></div></div>
+<div style="font-size: 14px; color: #b8ab92">{{votoRespostasTexto}}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{toastShow}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: fixed; left: 50%; bottom: 32px; padding: 14px 26px; border-radius: 999px; background: #f0c75e; color: #17131f; font-family: 'Righteous', sans-serif; font-size: 24px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); z-index: 40; animation: toast 1.8s ease-out forwards">{{toast}}</div>
+</sc-if>
+</div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="telemovel/config.js"></script>
+<script src="telemovel/perguntas.js"></script>
+<script src="telemovel/votacao.js"></script>
+<script src="js/dc-lite.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
