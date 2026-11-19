@@ -9,6 +9,8 @@ a{color:#f3e9d2}a:hover{color:#ffffff}
 @keyframes pop{0%{transform:scale(0.6);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
 @keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes drop{from{transform:translateY(-14px);opacity:0}to{transform:translateY(0);opacity:1}}
+/* Aviso do quiz: treme ao aparecer, como um alarme */
+@keyframes alerta{0%,100%{transform:translateX(0) rotate(0)}10%{transform:translateX(-10px) rotate(-2deg)}20%{transform:translateX(10px) rotate(2deg)}30%{transform:translateX(-9px) rotate(-1.6deg)}40%{transform:translateX(9px) rotate(1.6deg)}50%{transform:translateX(-7px) rotate(-1.2deg)}60%{transform:translateX(7px) rotate(1.2deg)}70%{transform:translateX(-4px) rotate(-.6deg)}80%{transform:translateX(4px) rotate(.6deg)}90%{transform:translateX(-2px) rotate(0)}}
 @keyframes grow{from{width:0}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.35}}
@@ -111,3 +113,81 @@ body::after {
 .eg-luz1,.eg-luz2{position:absolute;top:50%;transform:translateY(-50%)}
 .eg-luz1{height:121px;width:121px;background:radial-gradient(50% 50% at 50% 50%,#fffff5 3.5%,#ffaa81 26.5%,#ffda9f 37.5%,rgba(255,170,129,.5) 49%,rgba(210,106,58,0) 92.5%)}
 .eg-luz2{height:103px;width:204px;filter:blur(5px);background:radial-gradient(43.3% 44.23% at 50% 49.51%,#fffff7 29%,#fffacd 48.5%,#f4d2bf 60.71%,rgba(214,211,210,0) 100%)}
+
+/* Efeitos adaptados de componentes com licença MIT:
+   - Card do QR code: "dangerous-warthog-85" do Uiverse (https://uiverse.io/SteveBloX/dangerous-warthog-85).
+     Copyright - 2026 SteveBloX (SteveBloX).
+   - Setas das fotografias: "Staggered Letter Glow Button" do MicroKit (https://github.com/henriquegpb/microkit).
+     Copyright (c) 2026 Henrique Barone.
+   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+   documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+   the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
+   to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above
+   copyright notice and this permission notice shall be included in all copies or substantial portions of the
+   Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+   LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+   SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+   OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE. */
+
+/* Card do QR code: vidro translúcido escuro; cresce ao passar o rato e inclina-se ao clicar
+   (mesmo efeito do original, com as cores trocadas para o tema escuro) */
+.qr-card{box-sizing:border-box;background:rgba(43,36,51,0.55);border:1px solid rgba(243,233,210,0.45);box-shadow:12px 17px 51px rgba(0,0,0,0.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:17px;cursor:pointer;transition:all 0.5s;user-select:none;color:#f3e9d2}
+.qr-card:hover{border:1px solid #f3e9d2;transform:scale(1.05)}
+.qr-card:active{transform:scale(0.95) rotateZ(1.7deg)}
+
+/* Setas: pílula escura; ao passar o rato acende o contorno e as pontas a laranja e o ícone sobe, trocando por outro igual */
+.seta{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;box-sizing:border-box;cursor:pointer;appearance:none;border-radius:999px;border:1px solid #48484f;background:#15151b;padding:0;color:#fff8f3;transition:background-color .3s ease,border-color .32s ease,box-shadow .4s cubic-bezier(.16,1,.3,1)}
+.seta:hover,.seta:focus-visible{border-color:#f97316;background:#18181e;box-shadow:inset 28px 0 34px -28px rgba(249,115,22,.62),inset -28px 0 34px -28px rgba(249,115,22,.62),inset 0 0 18px rgba(249,115,22,.08)}
+.seta:focus-visible{outline:2px solid #f97316;outline-offset:5px}
+.seta-cel{position:relative;display:inline-grid;height:18px;place-items:center;overflow:hidden}
+.seta-a,.seta-b{grid-column:1;grid-row:1;display:flex;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.seta-b{transform:translateY(125%)}
+.seta:hover .seta-a,.seta:focus-visible .seta-a{transform:translateY(-125%)}
+.seta:hover .seta-b,.seta:focus-visible .seta-b{transform:translateY(0)}
+/* Botão "Rewind the tape": o mesmo efeito, com as letras a trocar uma a uma (como no original do MicroKit) */
+.seta.seta-texto{width:auto;height:54px;padding:0 28px}
+.letras{display:inline-flex;align-items:center}
+.letra-cel{position:relative;display:inline-grid;height:20px;place-items:center;overflow:hidden;font-size:17px;font-weight:600;line-height:20px;letter-spacing:-.2px}
+.letra-a,.letra-b{grid-column:1;grid-row:1;transition:transform .45s cubic-bezier(.16,1,.3,1);transition-delay:var(--letter-delay)}
+.letra-b{transform:translateY(125%)}
+.seta:hover .letra-a,.seta:focus-visible .letra-a{transform:translateY(-125%)}
+.seta:hover .letra-b,.seta:focus-visible .letra-b{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){.seta,.seta-a,.seta-b,.letra-a,.letra-b{transition:none}}
+
+/* Card de informação das obras e card da linha do tempo: as animações estão em js/transicoes.js.
+   O brilho na cor da faixa fica escondido à direita até ser animado. */
+.info-brilho{position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent 25%,color-mix(in srgb,var(--cor) 38%,transparent) 50%,transparent 75%);transform:translateX(110%)}
+
+/* Mudança de página: a página não se move toda. O resto muda logo e só os componentes principais
+   fazem a transição, como num site:
+   - título: o antigo sobe e desaparece; o novo sobe de baixo, a revelar-se;
+   - separadores: deslizam para o novo sítio;
+   - card principal: muda de altura suavemente e o conteúdo novo aparece a subir;
+   - fotografia: a antiga sai para o lado a rodar; a nova entra de baixo com efeito de mola.
+   Quando só se muda de passo na mesma faixa, o título e a fotografia ficam quietos. */
+.vt-titulo{view-transition-name:vt-titulo}
+.vt-tabs{view-transition-name:vt-tabs}
+.vt-conteudo{view-transition-name:vt-conteudo}
+.vt-lado{view-transition-name:vt-lado}
+::view-transition-old(root),::view-transition-new(root){animation:none}
+::view-transition-group(vt-titulo),::view-transition-group(vt-tabs),::view-transition-group(vt-conteudo),::view-transition-group(vt-lado){animation-duration:.7s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-group(vt-titulo),::view-transition-group(vt-conteudo){overflow:hidden}
+::view-transition-group(vt-conteudo){border-radius:22px}
+::view-transition-old(vt-titulo),::view-transition-new(vt-titulo),::view-transition-old(vt-conteudo),::view-transition-new(vt-conteudo),::view-transition-old(vt-lado),::view-transition-new(vt-lado){width:auto;height:auto;inset:0 auto auto 0}
+::view-transition-old(vt-titulo){animation:vtSobeSai .3s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(vt-titulo){animation:vtSobeEntra .7s .12s cubic-bezier(.2,.8,.2,1) both}
+::view-transition-old(vt-tabs),::view-transition-new(vt-tabs){animation-duration:.45s}
+::view-transition-old(vt-conteudo){animation:vtApaga .25s ease-in both}
+::view-transition-new(vt-conteudo){animation:vtConteudoEntra .65s .1s cubic-bezier(.2,.8,.2,1) both}
+::view-transition-old(vt-lado){animation:vtFotoSai .4s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(vt-lado){animation:vtFotoEntra .85s .15s cubic-bezier(.3,1.35,.5,1) both}
+html[data-mudanca="separador"]::view-transition-old(vt-titulo),html[data-mudanca="separador"]::view-transition-new(vt-titulo),
+html[data-mudanca="separador"]::view-transition-old(vt-lado),html[data-mudanca="separador"]::view-transition-new(vt-lado){animation:none}
+@keyframes vtSobeSai{to{opacity:0;transform:translateY(-20px);filter:blur(4px)}}
+@keyframes vtSobeEntra{from{opacity:0;transform:translateY(28px);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0 0 0 0)}}
+@keyframes vtApaga{to{opacity:0;transform:scale(.985)}}
+@keyframes vtConteudoEntra{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes vtFotoSai{to{opacity:0;transform:translateX(50px) rotate(7deg) scale(.92)}}
+@keyframes vtFotoEntra{from{opacity:0;transform:translateY(50px) rotate(-6deg) scale(.92)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}

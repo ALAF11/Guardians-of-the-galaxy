@@ -155,11 +155,27 @@ class Component extends DCLogic {
   // Percurso: em cada faixa Obras → Contributo e ligações → faixa seguinte.
   // Depois dos Parques vem a faixa escondida (Os Fãs). A faixa pessoal só tem Obras, e no fim vem o mapa.
   // Na página inicial, o primeiro avanço só põe a fita a contar (abertura).
+  // Mudança de página com transição (js/transicoes.js): dir 1 para a frente, -1 para trás
+  // tipo 'separador' quando só muda o passo dentro da mesma faixa; 'faixa' quando muda a página
+  mudarPagina(dir, fn, tipo) {
+    if (window.Transicoes) Transicoes.mudarPagina(dir, fn, tipo); else fn();
+  }
   next() {
     const s = this.state;
+    if (s.view === 'home' && !s.timerOn && s.secs === 0) { this.startTape(); return; }
+    const tipo = s.view === 'track' && s.tab < 1 && s.i < 7 ? 'separador' : 'faixa';
+    this.mudarPagina(1, () => this.avancar(), tipo);
+  }
+  prev() {
+    const s = this.state;
+    if (s.view === 'home') return;
+    const tipo = s.view === 'track' && s.tab > 0 ? 'separador' : 'faixa';
+    this.mudarPagina(-1, () => this.recuar(), tipo);
+  }
+  avancar() {
+    const s = this.state;
     if (s.view === 'home') {
-      if (!s.timerOn && s.secs === 0) this.startTape();
-      else { this.open(s.secs > 0 ? s.i : 0); this.startTape(); }
+      this.open(s.secs > 0 ? s.i : 0); this.startTape();
     } else if (s.view === 'track') {
       if (s.tab < 1 && s.i < 7) this.goTab(1);
       else if (s.i === 6) this.showFans();
@@ -170,7 +186,7 @@ class Component extends DCLogic {
       this.perguntar(7);
     }
   }
-  prev() {
+  recuar() {
     const s = this.state;
     if (s.view === 'track') {
       if (s.tab > 0) this.setState({ tab: s.tab - 1 });
@@ -297,7 +313,12 @@ class Component extends DCLogic {
     });
     const c = T[s.i];
     const sel = Math.min(s.workSel[s.i] || 0, c.works.length - 1);
-    const setWork = (k) => { const ws = Object.assign({}, s.workSel); ws[s.i] = k; this.setState({ workSel: ws, flip: false }); };
+    // Mudar de obra: antes de atualizar, a fotografia atual passa para trás da nova (js/transicoes.js)
+    const setWork = (k, dir) => {
+      if (k === sel) return;
+      if (window.Transicoes) Transicoes.antesDeMudarFoto(dir || (k > sel ? 1 : -1));
+      const ws = Object.assign({}, s.workSel); ws[s.i] = k; this.setState({ workSel: ws, flip: false });
+    };
     const cur = {
       num: pad(s.i + 1), title: c.title, platform: c.platform, color: c.color, short: c.short,
       sideLabel: c.side === 'Bonus' ? 'BONUS TRACK' : 'SIDE ' + c.side,
@@ -452,10 +473,9 @@ class Component extends DCLogic {
       pola: pola, polaRot: polaRots[sel % 4], polaDots: polaDots, stackOpacity: c.works.length > 1 ? 1 : 0,
       flipDeg: s.flip ? 180 : 0,
       toggleFlip: () => this.setState((p) => ({ flip: !p.flip })),
-      polaPrev: () => setWork((sel - 1 + c.works.length) % c.works.length),
-      polaNext: () => setWork((sel + 1) % c.works.length),
+      polaPrev: () => setWork((sel - 1 + c.works.length) % c.works.length, -1),
+      polaNext: () => setWork((sel + 1) % c.works.length, 1),
       pieces: pieces, conLines: conLines, conNodes: conNodes, portalsOpen: portalsOpen,
-      revealAll: () => { const nb = Object.assign({}, s.beats); nb[s.i] = [true, true, true]; this.setState({ beats: nb }); },
       visitedCount: visitedCount, tapeLabel: s.playing ? 'PLAYING' : 'C-60',
       startLabel: s.secs > 0 ? 'Continue' : 'Play: start the 7 minutes',
       showBack: !(s.i === 0 && s.tab === 0),

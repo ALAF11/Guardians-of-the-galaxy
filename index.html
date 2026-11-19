@@ -54,13 +54,13 @@
 </div>
 <div style="background: #17131f; border-radius: 10.5cqw; padding: 2.3cqw 4.7cqw; display: flex; align-items: center; justify-content: space-between; gap: 2.8cqw">
 <div style="width: 19%; aspect-ratio: 1 / 1; flex-shrink: 0; border-radius: 50%; background: #f3e9d2; border: 1.2cqw solid #3a3145; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
-<div style="{{reelAnim}}; width: 70%; height: 70%; display: flex">
+<div style="animation: spin 2.4s linear infinite; width: 70%; height: 70%; display: flex">
 <svg width="100%" height="100%" viewBox="0 0 60 60" aria-hidden="true"><g fill="#2b2433"><rect x="27" y="3" width="6" height="15" rx="2"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(60 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(120 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(180 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(240 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(300 30 30)"></rect><circle cx="30" cy="30" r="10"></circle></g><circle cx="30" cy="30" r="4" fill="#f3e9d2"></circle></svg>
 </div>
 </div>
 <div style="flex: 1; height: 7.4cqw; border-radius: 1.2cqw; background: #5a3a26; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 1.9cqw; letter-spacing: 0.16em; color: #e8c9a4">{{tapeLabel}}</div>
 <div style="width: 19%; aspect-ratio: 1 / 1; flex-shrink: 0; border-radius: 50%; background: #f3e9d2; border: 1.2cqw solid #3a3145; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
-<div style="{{reelAnim}}; width: 70%; height: 70%; display: flex">
+<div style="animation: spin 2.4s linear infinite; width: 70%; height: 70%; display: flex">
 <svg width="100%" height="100%" viewBox="0 0 60 60" aria-hidden="true"><g fill="#2b2433"><rect x="27" y="3" width="6" height="15" rx="2"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(60 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(120 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(180 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(240 30 30)"></rect><rect x="27" y="3" width="6" height="15" rx="2" transform="rotate(300 30 30)"></rect><circle cx="30" cy="30" r="10"></circle></g><circle cx="30" cy="30" r="4" fill="#f3e9d2"></circle></svg>
 </div>
 </div>
@@ -77,7 +77,7 @@
 </div>
 
 <sc-if value="{{votacaoOn}}" hint-placeholder-val="{{ false }}">
-<div style="flex: 0 0 262px; padding: 16px 18px; border-radius: 22px; background: #201a29; border: 1px solid #3a3145; box-sizing: border-box; display: flex; flex-direction: column; gap: 9px; align-items: center; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.45); animation: rise 0.4s ease-out">
+<div class="qr-card" style="flex: 0 0 262px; padding: 16px 18px; display: flex; flex-direction: column; gap: 9px; align-items: center; text-align: center; animation: rise 0.4s ease-out">
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: {{accent}}">SCAN TO PLAY THE QUIZ</div>
 <sc-if value="{{qrSrc}}" hint-placeholder-val="{{ false }}">
 <img src="{{qrSrc}}" alt="QR code for the voting page" style="display: block; width: 148px; height: 148px; border-radius: 12px; border: 6px solid #f3e9d2; box-sizing: border-box">
@@ -137,11 +137,11 @@ Back to the tape
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; justify-content: space-between">
-<div style="display: flex; flex-direction: column; gap: 6px">
+<div class="vt-titulo" style="display: flex; flex-direction: column; gap: 6px">
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: {{cur.color}}">{{cur.platform}}</div>
 <h2 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(38px, 5vw, 60px); line-height: 1.02">{{cur.title}}</h2>
 </div>
-<div role="tablist" aria-label="Steps in this track" style="display: flex; flex-wrap: wrap; gap: 6px">
+<div class="vt-tabs" role="tablist" aria-label="Steps in this track" style="display: flex; flex-wrap: wrap; gap: 6px">
 <sc-for list="{{tabs}}" as="tb" hint-placeholder-count="3">
 <button class="shine" role="tab" aria-selected="{{tb.sel}}" onClick="{{tb.pick}}" style="min-height: 44px; padding: 0 14px; border: 1px solid {{tb.border}}; border-radius: 999px; background: {{tb.bg}}; color: {{tb.fg}}; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px"><span style="font-family: 'IBM Plex Mono', monospace; font-weight: 400; opacity: 0.8">{{tb.n}}</span>{{tb.label}}</button>
 </sc-for>
@@ -149,30 +149,31 @@ Back to the tape
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 56px; align-items: stretch">
-<div style="flex: 1 1 640px; min-width: 0; min-height: 440px; background: #201a29; border: 1px solid #3a3145; border-radius: 22px; padding: 26px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+<div class="vt-conteudo" style="flex: 1 1 640px; min-width: 0; min-height: 440px; background: #201a29; border: 1px solid #3a3145; border-radius: 22px; padding: 26px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
 
 <sc-if value="{{t0}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-direction: column; gap: 22px; animation: rise 0.35s ease-out">
-<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<div class="obras-bloco" data-faixa="{{cur.num}}" style="display: flex; flex-direction: column; gap: 22px">
+<div class="lt-topo" style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; color: {{cur.color}}">TIMELINE OF THE WORKS</div>
 <div style="font-size: 14px; color: #b8ab92">Tap a work: the photo changes with it</div>
 </div>
 <div style="position: relative; display: flex; justify-content: space-between; gap: 8px; padding: 6px 4px">
-<div style="position: absolute; left: 40px; right: 40px; top: 38px; height: 6px; border-radius: 3px; background: #5a3a26"></div>
-<div style="position: absolute; left: 40px; top: 38px; height: 6px; border-radius: 3px; background: {{cur.color}}; width: {{timelineFill}}; transition: width 0.5s ease-out"></div>
+<div class="lt-base" style="position: absolute; left: 40px; right: 40px; top: 38px; height: 6px; border-radius: 3px; background: #5a3a26; transform-origin: left center"></div>
+<div class="lt-fill" style="position: absolute; left: 40px; top: 38px; height: 6px; border-radius: 3px; background: {{cur.color}}; width: {{timelineFill}}; transition: width 0.8s ease-out; transform-origin: left center"></div>
 <sc-for list="{{cur.works}}" as="w" hint-placeholder-count="3">
-<button onClick="{{w.pick}}" aria-label="Open {{w.label}}" style="position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: none; background: transparent; color: #f3e9d2; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<button class="lt-obra" onClick="{{w.pick}}" aria-label="Open {{w.label}}" style="position: relative; flex: 1 1 0; min-width: 0; padding: 0; border: none; background: transparent; color: #f3e9d2; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px">
 <span style="width: 68px; height: 68px; border-radius: 50%; background: {{w.dot}}; border: 4px solid {{w.ring}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; color: {{w.dotText}}; box-shadow: {{w.glow}}; transition: all 0.25s">{{w.year}}</span>
 <span style="font-size: 14px; font-weight: 700; line-height: 1.25; text-align: center; color: {{w.labelColor}}">{{w.label}}</span>
 </button>
 </sc-for>
 </div>
-<div style="padding: 22px 24px; border-radius: 18px; background: #2b2433; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap">
-<span style="font-family: 'Righteous', sans-serif; font-size: 30px; line-height: 1.1">{{cur.sel.label}}</span>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{cur.color}}">{{cur.sel.year}}</span>
+<div class="info-card" style="--cor: {{cur.color}}; position: relative; overflow: hidden; padding: 22px 24px; border-radius: 18px; background: #2b2433; display: flex; flex-direction: column; gap: 8px">
+<span class="info-brilho" aria-hidden="true"></span>
+<div style="position: relative; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap">
+<span class="info-titulo" style="font-family: 'Righteous', sans-serif; font-size: 30px; line-height: 1.1">{{cur.sel.label}}</span>
+<span class="info-ano" style="display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{cur.color}}">{{cur.sel.year}}</span>
 </div>
-<p style="margin: 0; font-size: 19px; line-height: 1.5; color: #e6dcc6">{{cur.sel.note}}</p>
+<p class="info-nota" style="position: relative; margin: 0; font-size: 19px; line-height: 1.5; color: #e6dcc6">{{cur.sel.note}}</p>
 </div>
 </div>
 </sc-if>
@@ -215,7 +216,6 @@ Back to the tape
 </sc-for>
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 6px">
 <span style="font-size: 14px; color: #b8ab92">Portals open across the universe: <strong style="color: #f3e9d2">{{portalsOpen}}/21</strong></span>
-<button class="shine" onClick="{{revealAll}}" style="min-height: 40px; padding: 0 14px; border: 1px solid #5c5068; border-radius: 999px; background: transparent; color: #f3e9d2; font-size: 13px; cursor: pointer">Open all</button>
 </div>
 </div>
 </div>
@@ -224,20 +224,20 @@ Back to the tape
 
 </div>
 
-<div style="flex: 0 1 340px; min-width: 260px; box-sizing: border-box; padding: 18px 22px 0; display: flex; flex-direction: column; gap: 44px">
-<div style="position: relative; width: 100%; aspect-ratio: 4 / 5">
+<div class="vt-lado" style="flex: 0 1 340px; min-width: 260px; box-sizing: border-box; padding: 18px 22px 0; display: flex; flex-direction: column; gap: 44px">
+<div class="pola-pilha" style="position: relative; width: 100%; aspect-ratio: 4 / 5">
 <span style="position: absolute; inset: 0; background: #d9cdb4; border-radius: 6px; transform: rotate(6deg) translate(10px, 4px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); opacity: {{stackOpacity}}"></span>
 <span style="position: absolute; inset: 0; background: #e6dcc6; border-radius: 6px; transform: rotate(-5deg) translate(-8px, 6px); box-shadow: 0 10px 24px rgba(0,0,0,0.4); opacity: {{stackOpacity}}"></span>
-<button onClick="{{toggleFlip}}" aria-label="Flip the photo" style="position: absolute; inset: 0; padding: 0; border: none; background: transparent; cursor: pointer; perspective: 1200px; transform: rotate({{polaRot}}deg); transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1)">
+<button class="pola-foto" onClick="{{toggleFlip}}" aria-label="Flip the photo" style="position: absolute; inset: 0; padding: 0; border: none; background: transparent; cursor: pointer; perspective: 1200px; transform: rotate({{polaRot}}deg); transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1)">
 <span style="position: absolute; inset: 0; display: block; transform-style: preserve-3d; transition: transform 0.7s ease; transform: rotateY({{flipDeg}}deg)">
-<span style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #f3e9d2; border-radius: 6px; padding: 14px 14px 62px; box-sizing: border-box; box-shadow: 0 18px 40px rgba(0,0,0,0.45); display: flex; flex-direction: column">
+<span style="position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #f3e9d2; border-radius: 6px; padding: 14px 14px 0; box-sizing: border-box; box-shadow: 0 18px 40px rgba(0,0,0,0.45); display: flex; flex-direction: column">
 <sc-if value="{{pola.src}}" hint-placeholder-val="{{ false }}">
 <span style="flex: 1; min-height: 0; display: flex; background: #17131f; overflow: hidden"><img src="{{pola.src}}" alt="{{pola.img}}" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: {{pola.pos}}; transform: scale({{pola.zoom}})"></span>
 </sc-if>
 <sc-if value="{{pola.noSrc}}" hint-placeholder-val="{{ true }}">
 <span style="flex: 1; border: 2px dashed #b8ab92; background: #e6dcc6; display: flex; align-items: center; justify-content: center; padding: 14px; box-sizing: border-box; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5c5068; text-align: center">{{pola.img}}</span>
 </sc-if>
-<span style="position: absolute; left: 14px; right: 14px; bottom: 12px; display: flex; flex-direction: column; gap: 2px; align-items: center">
+<span style="flex: none; min-height: 48px; padding: 10px 2px 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; align-items: center; justify-content: center">
 <span style="font-family: 'Righteous', sans-serif; font-size: 18px; color: #17131f; text-align: center; line-height: 1.1">{{pola.label}}</span>
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5c5068">{{pola.year}}</span>
 </span>
@@ -250,13 +250,13 @@ Back to the tape
 </button>
 </div>
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
-<button onClick="{{polaPrev}}" aria-label="Previous work" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #5c5068; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<button class="seta" onClick="{{polaPrev}}" aria-label="Previous work"><span class="seta-cel" aria-hidden="true"><span class="seta-a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="seta-b"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></button>
 <div style="display: flex; gap: 6px">
 <sc-for list="{{polaDots}}" as="pd" hint-placeholder-count="3">
 <span style="width: 10px; height: 10px; border-radius: 50%; background: {{pd.color}}; transition: background 0.3s"></span>
 </sc-for>
 </div>
-<button onClick="{{polaNext}}" aria-label="Next work" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #5c5068; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<button class="seta" onClick="{{polaNext}}" aria-label="Next work"><span class="seta-cel" aria-hidden="true"><span class="seta-a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="seta-b"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></span></button>
 </div>
 <div style="margin-top: -26px; font-size: 14px; line-height: 1.5; color: #b8ab92; text-align: center">Tap the photo to flip it · the arrows change the work</div>
 </div>
@@ -282,12 +282,12 @@ Back to the tape
 <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="#f3e9d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 Back to the tape
 </button>
-<header style="display: flex; flex-direction: column; gap: 8px">
+<header class="vt-titulo" style="display: flex; flex-direction: column; gap: 8px">
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #f0c75e">HIDDEN TRACK · END OF SIDE B</div>
 <h2 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(38px, 5vw, 62px); line-height: 1.02">The Fans: the platform nobody releases</h2>
 <p style="margin: 0; font-size: 18px; color: #d9cdb4; max-width: 720px; line-height: 1.5">Henry Jenkins calls it participatory culture: in transmedia, the audience also creates and takes the universe home.</p>
 </header>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px">
+<div class="vt-conteudo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px">
 <sc-for list="{{fanCards}}" as="fc" hint-placeholder-count="4">
 <button onClick="{{fc.pick}}" style="min-height: 210px; padding: 22px; border: 2px solid {{fc.border}}; border-radius: 18px; background: {{fc.bg}}; color: {{fc.fg}}; cursor: pointer; display: flex; flex-direction: column; justify-content: center; gap: 10px; text-align: left">
 <span style="font-family: 'Righteous', sans-serif; font-size: 26px; line-height: 1.1">{{fc.title}}</span>
@@ -309,12 +309,12 @@ Back to the tape
 
 <sc-if value="{{isMap}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-direction: column; gap: 24px">
-<header style="display: flex; flex-direction: column; gap: 8px">
+<header class="vt-titulo" style="display: flex; flex-direction: column; gap: 8px">
 <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; color: #b8ab92">SIDE B · END OF THE TAPE</div>
 <h2 style="margin: 0; font-family: 'Righteous', sans-serif; font-weight: 400; font-size: clamp(36px, 5vw, 60px); line-height: 1.02">The Transmedia Galaxy Map</h2>
 <p style="margin: 0; font-size: 18px; color: #d9cdb4; max-width: 680px; line-height: 1.5">Each planet is one part of the universe and each line is a link between them. None of them tells the whole story; together, they make one universe.</p>
 </header>
-<div style="display: flex; flex-wrap: wrap; gap: 36px; align-items: center">
+<div class="vt-conteudo" style="display: flex; flex-wrap: wrap; gap: 36px; align-items: center">
 <div style="flex: 1 1 520px; min-width: 0; display: flex; justify-content: center">
 <div style="position: relative; width: 100%; max-width: 640px; aspect-ratio: 1 / 1; border-radius: 24px; background-color: #120f19; background-image: radial-gradient(rgba(243,233,210,0.5) 1px, transparent 1.5px), radial-gradient(rgba(108,196,232,0.35) 1px, transparent 1.5px); background-size: 46px 46px, 73px 73px">
 <sc-for list="{{mapLinks}}" as="ml" hint-placeholder-count="0">
@@ -356,7 +356,7 @@ Back to the tape
 </sc-if>
 <div style="padding: 18px 20px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; font-size: 17px; line-height: 1.55"><span style="display: block; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #b8ab92">WHERE TO START</span>{{startPath}}</div>
 <div style="padding: 18px 20px; border-radius: 16px; background: #201a29; border: 1px solid #3a3145; font-size: 16px; line-height: 1.55; color: #d9cdb4">Peter kept his whole world on one tape. Now you have the whole map: pick a track and press Play.</div>
-<button onClick="{{rewind}}" style="min-height: 52px; padding: 0 24px; border: none; border-radius: 999px; background: {{accent}}; color: #17131f; font-weight: 700; font-size: 17px; cursor: pointer">Rewind the tape (start over)</button>
+<button class="seta seta-texto" onClick="{{rewind}}" aria-label="Rewind the tape (start over)"><span class="letras" aria-hidden="true"><span class="letra-cel" style="--letter-delay: 0ms"><span class="letra-a">R</span><span class="letra-b">R</span></span><span class="letra-cel" style="--letter-delay: 34ms"><span class="letra-a">e</span><span class="letra-b">e</span></span><span class="letra-cel" style="--letter-delay: 68ms"><span class="letra-a">w</span><span class="letra-b">w</span></span><span class="letra-cel" style="--letter-delay: 102ms"><span class="letra-a">i</span><span class="letra-b">i</span></span><span class="letra-cel" style="--letter-delay: 136ms"><span class="letra-a">n</span><span class="letra-b">n</span></span><span class="letra-cel" style="--letter-delay: 170ms"><span class="letra-a">d</span><span class="letra-b">d</span></span><span class="letra-cel" style="--letter-delay: 204ms"><span class="letra-a">&nbsp;</span><span class="letra-b">&nbsp;</span></span><span class="letra-cel" style="--letter-delay: 238ms"><span class="letra-a">t</span><span class="letra-b">t</span></span><span class="letra-cel" style="--letter-delay: 272ms"><span class="letra-a">h</span><span class="letra-b">h</span></span><span class="letra-cel" style="--letter-delay: 306ms"><span class="letra-a">e</span><span class="letra-b">e</span></span><span class="letra-cel" style="--letter-delay: 340ms"><span class="letra-a">&nbsp;</span><span class="letra-b">&nbsp;</span></span><span class="letra-cel" style="--letter-delay: 374ms"><span class="letra-a">t</span><span class="letra-b">t</span></span><span class="letra-cel" style="--letter-delay: 408ms"><span class="letra-a">a</span><span class="letra-b">a</span></span><span class="letra-cel" style="--letter-delay: 442ms"><span class="letra-a">p</span><span class="letra-b">p</span></span><span class="letra-cel" style="--letter-delay: 476ms"><span class="letra-a">e</span><span class="letra-b">e</span></span><span class="letra-cel" style="--letter-delay: 510ms"><span class="letra-a">&nbsp;</span><span class="letra-b">&nbsp;</span></span><span class="letra-cel" style="--letter-delay: 544ms"><span class="letra-a">(</span><span class="letra-b">(</span></span><span class="letra-cel" style="--letter-delay: 578ms"><span class="letra-a">s</span><span class="letra-b">s</span></span><span class="letra-cel" style="--letter-delay: 612ms"><span class="letra-a">t</span><span class="letra-b">t</span></span><span class="letra-cel" style="--letter-delay: 646ms"><span class="letra-a">a</span><span class="letra-b">a</span></span><span class="letra-cel" style="--letter-delay: 680ms"><span class="letra-a">r</span><span class="letra-b">r</span></span><span class="letra-cel" style="--letter-delay: 714ms"><span class="letra-a">t</span><span class="letra-b">t</span></span><span class="letra-cel" style="--letter-delay: 748ms"><span class="letra-a">&nbsp;</span><span class="letra-b">&nbsp;</span></span><span class="letra-cel" style="--letter-delay: 782ms"><span class="letra-a">o</span><span class="letra-b">o</span></span><span class="letra-cel" style="--letter-delay: 816ms"><span class="letra-a">v</span><span class="letra-b">v</span></span><span class="letra-cel" style="--letter-delay: 850ms"><span class="letra-a">e</span><span class="letra-b">e</span></span><span class="letra-cel" style="--letter-delay: 884ms"><span class="letra-a">r</span><span class="letra-b">r</span></span><span class="letra-cel" style="--letter-delay: 918ms"><span class="letra-a">)</span><span class="letra-b">)</span></span></span></button>
 </div>
 </div>
 </div>
@@ -417,7 +417,7 @@ Back to the tape
 
 <sc-if value="{{votoPill}}" hint-placeholder-val="{{ false }}">
 <!-- Aviso do quiz: faixa no topo ao centro, entre os botões dos lados; não recebe cliques, para nunca bloquear a navegação -->
-<div role="status" style="position: fixed; top: 10px; left: 0; right: 0; margin: 0 auto; width: min(560px, calc(100vw - 660px)); min-width: 320px; padding: 10px 16px; border-radius: 18px; background: #201a29; border: 2px solid {{votoCor}}; box-shadow: 0 16px 40px rgba(0,0,0,0.6); box-sizing: border-box; z-index: 30; pointer-events: none; color: #f3e9d2; font-family: 'DM Sans', system-ui, sans-serif; display: flex; align-items: center; gap: 16px; animation: drop 0.35s ease-out">
+<div role="status" style="position: fixed; top: 10px; left: 0; right: 0; margin: 0 auto; width: min(560px, calc(100vw - 660px)); min-width: 320px; padding: 10px 16px; border-radius: 18px; background: #201a29; border: 2px solid {{votoCor}}; box-shadow: 0 16px 40px rgba(0,0,0,0.6); box-sizing: border-box; z-index: 30; pointer-events: none; color: #f3e9d2; font-family: 'DM Sans', system-ui, sans-serif; display: flex; align-items: center; gap: 16px; animation: drop 0.35s ease-out, alerta 0.7s 0.35s 2 ease-in-out">
 <span style="flex: 0 0 auto; min-width: 58px; height: 58px; padding: 0 6px; border-radius: 14px; background: {{votoCor}}; color: #17131f; display: flex; align-items: center; justify-content: center; font-family: 'Righteous', sans-serif; font-size: 34px; line-height: 1; box-sizing: border-box">{{votoSeg}}</span>
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em">
@@ -443,5 +443,6 @@ Back to the tape
 <script src="js/dc-lite.js"></script>
 <script src="js/app.js"></script>
 <script src="js/botoes.js"></script>
+<script src="js/transicoes.js"></script>
 </body>
 </html>
